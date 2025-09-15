@@ -2,10 +2,9 @@
 
 namespace App\Dto;
 
-use App\Dto\BaseAbstractDto;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class LoginDto extends BaseAbstractDto
+class LoginDto
 {
     #[Assert\Type('string')]
     #[Assert\NotBlank]
