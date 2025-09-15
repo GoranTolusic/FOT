@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class FrontController extends AbstractController
+class PageController extends AbstractController
 {
     #[Route('/', name: 'get_home_page', methods: ['GET'])]
     public function getHomePage(Request $request): Response
@@ -17,10 +17,11 @@ class FrontController extends AbstractController
         $accessToken = $session->get('access_token');
         //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
-        
-        $userName = $session->get('user')['first_name'];
+
+        $userFirstName = $session->get('user')['first_name'];
+        $userLastName = $session->get('user')['last_name'];
         return $this->render('home.html.twig', [
-            'message' => "You are logged in. Welcome to Home Page, dear $userName!",
+            'message' => "You are logged in. Welcome to Home Page, dear $userFirstName $userLastName!",
         ]);
     }
 
