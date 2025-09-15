@@ -13,20 +13,18 @@ class FrontController extends AbstractController
     public function getHomePage(Request $request): Response
     {
         //This needs to be some kind of global middleware
-        $session = $request->getSession();
-        $accessToken = $session->get('access_token');
+        $accessToken = $request->getSession()->get('access_token');
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
 
-        return $this->render('base.html.twig', [
-            'message' => 'Hello world',
+        return $this->render('home.html.twig', [
+            'message' => 'Welcome to Home Page',
         ]);
     }
 
     #[Route('/login', name: 'get_login_page', methods: ['GET'])]
     public function getLoginPage(Request $request): Response
     {
-        $session = $request->getSession();
-        $accessToken = $session->get('access_token');
+        $accessToken = $request->getSession()->get('access_token');
         if ($accessToken) return $this->redirectToRoute('get_home_page');
 
         return $this->render('login.html.twig', [

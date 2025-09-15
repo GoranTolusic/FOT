@@ -15,8 +15,13 @@ class AuthController extends AbstractController
         $data = $request->request->all();
         consoleLog($data);
         $session = $request->getSession();
-        $session->set('access_token', '1234');
+        //First invalidate existing one
+        $session->invalidate();
 
+        //TODO: Validate input, and proceed params to service to handle api call to candidate API and retrieve token, set token in session
+
+        //Set session
+        $session->set('access_token', '1234');
         return $this->redirectToRoute('get_home_page');
     }
 
