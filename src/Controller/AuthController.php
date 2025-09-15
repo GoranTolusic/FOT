@@ -6,14 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Dto\LoginDto;
+use App\Traits\RequestValidationTrait;
 
 class AuthController extends AbstractController
 {
+    use RequestValidationTrait;
+
     #[Route('/auth/login', name: 'auth_login', methods: ['POST'])]
     public function login(Request $request): Response
     {
-        $data = $request->request->all();
-        consoleLog($data);
+        $dtoInputs = $this->validateRequestDto($request, LoginDto::class);
+
         $session = $request->getSession();
         //First invalidate existing one
         $session->invalidate();

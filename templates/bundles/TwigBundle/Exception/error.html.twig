@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oops! Error {{ status_code }}{% endblock %}
+
+{% block body %}
+<h1>Error {{ status_code }}</h1>
+<p>{{ status_text|default('Something went wrong.') }}</p>
+<a href="{{ path('home') }}">Return Home</a>
+{% endblock %}
