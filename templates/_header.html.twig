@@ -1,0 +1,15 @@
+<header>
+    <nav>
+        <ul>
+            <li><a href="{{ path('get_home_page') }}">Home</a></li>
+
+            {% if app.session.get('access_token') %}
+                <li><a href="{{ path('auth_logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ path('get_login_page') }}">Login</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+</header>
+<hr>
