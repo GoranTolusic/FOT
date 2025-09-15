@@ -7,6 +7,7 @@ services:
     restart: always
     environment:
       CONSOLE_LOGS: "true"
+      API_URL: "https://candidate-testing.com"
     expose:
       - "9000"
 
