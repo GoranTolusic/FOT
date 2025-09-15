@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block body %}
+ {% if err %}
+    <h1>{{ err }}</h1>
+{% else %}
+    <h1>First Name: {{ user['first_name'] }}</h1>
+    <h1>Last Name: {{ user['last_name'] }}</h1>
+    <h1>Email: {{ user['email'] }}</h1>
+    <h1>Gender: {{ user['gender'] }}</h1>
+{% endif %}
+
+{% endblock %}
