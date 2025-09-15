@@ -5,5 +5,5 @@
 {% block body %}
 <h1>Error {{ status_code }}</h1>
 <p>{{ status_text|default('Something went wrong.') }}</p>
-<a href="{{ path('home') }}">Return Home</a>
+<a href="{{ path('get_home_page') }}">Return Home</a>
 {% endblock %}

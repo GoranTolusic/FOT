@@ -13,11 +13,14 @@ class FrontController extends AbstractController
     public function getHomePage(Request $request): Response
     {
         //This needs to be some kind of global middleware
-        $accessToken = $request->getSession()->get('access_token');
+        $session = $request->getSession();
+        $accessToken = $session->get('access_token');
+        //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
-
+        
+        $userName = $session->get('user')['first_name'];
         return $this->render('home.html.twig', [
-            'message' => 'Welcome to Home Page',
+            'message' => "You are logged in. Welcome to Home Page, dear $userName!",
         ]);
     }
 

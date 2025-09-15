@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Dto\LoginDto;
+use App\Services\HttpService;
 use App\Traits\RequestValidationTrait;
 
 class AuthController extends AbstractController
@@ -14,18 +15,26 @@ class AuthController extends AbstractController
     use RequestValidationTrait;
 
     #[Route('/auth/login', name: 'auth_login', methods: ['POST'])]
-    public function login(Request $request): Response
+    public function login(Request $request, HttpService $reqService): Response
     {
         $dtoInputs = $this->validateRequestDto($request, LoginDto::class);
+        $payload = [
+            "email" => $dtoInputs->email,
+            "password" => $dtoInputs->password,
+        ];
+
+        $response = $reqService->postJson('/api/v2/token', ['json' => $payload]);
+        if ($response['status'] !== 200) {
+            return $this->render('login.html.twig', [
+                'message' => 'Please enter your email and password to login!',
+                'errormsg' => 'Invalid Credentials'
+            ]);
+        }
 
         $session = $request->getSession();
-        //First invalidate existing one
-        $session->invalidate();
+        $session->set('access_token', $response['body']['token_key']);
+        $session->set('user', $response['body']['user']);
 
-        //TODO: Validate input, and proceed params to service to handle api call to candidate API and retrieve token, set token in session
-
-        //Set session
-        $session->set('access_token', '1234');
         return $this->redirectToRoute('get_home_page');
     }
 
