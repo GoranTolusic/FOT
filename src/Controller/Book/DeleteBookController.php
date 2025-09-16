@@ -11,7 +11,7 @@ use App\Services\HttpService;
 class DeleteBookController extends AbstractController
 {
     #[Route('/book/delete/{id}', name: 'book_delete', methods: ['POST'])]
-    public function login(Request $request, HttpService $reqService, int $id): Response
+    public function deleteBook(Request $request, HttpService $reqService, int $id): Response
     {
         //1. Retrieve session and access token from it
         $session = $request->getSession();
@@ -28,7 +28,7 @@ class DeleteBookController extends AbstractController
         ]);
 
         //3. if status is not successfull throw error
-        if ($response['status'] !== 204) throw new \Exception('Unable to delete book');
+        if ($response['status'] !== 204) throw new \Exception('Unable to delete book', $response['status']);
 
         //4. Redirect back to previous page
         $referer = $request->headers->get('referer');

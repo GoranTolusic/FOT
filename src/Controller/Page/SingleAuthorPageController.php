@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SingleAuthorPageController extends AbstractController
 {
     #[Route('/author-details/{id}', name: 'get_single_author_page', methods: ['GET'])]
-    public function getAuthorsPage(Request $request, HttpService $reqService, int $id): Response
+    public function getSingleAuthorPage(Request $request, HttpService $reqService, int $id): Response
     {
         //1. Retrieve session and access token from it
         $session = $request->getSession();
