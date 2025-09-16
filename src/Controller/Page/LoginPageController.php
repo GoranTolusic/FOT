@@ -16,7 +16,7 @@ class LoginPageController extends AbstractController
         $user = $request->getSession()->get('user');
         if ($user) return $this->redirectToRoute('get_home_page');
 
-        //2. Return rendered login page html
+        //2. Return rendered login page html with already predefined login credential values
         return $this->render('login.html.twig', [
             'message' => 'Please enter your email and password to login!',
             'defaultEmail' => $_ENV['API_USER_EMAIL'] ?? getenv('API_USER_EMAIL'),

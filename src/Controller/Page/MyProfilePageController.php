@@ -19,6 +19,9 @@ class MyProfilePageController extends AbstractController
         //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
 
+        //HINT: I can retrieve data from user session, but i realized 
+        //there is "me" endpoint in API docs for retrieving info about logged user
+
         //2. Get response from candidate api
         $response = $reqService->getJson('/api/v2/me', [
             'headers' => [
