@@ -35,8 +35,6 @@ class CreateBookPageController extends AbstractController
             ]
         ]);
 
-        consoleLog($authorsResp);
-
         //3. set some error variables if something goes wrong
         $err = false;
         if ($authorsResp['status'] !== 200) $err = 'Error occured. Unable to retrieve authors data';

@@ -40,11 +40,6 @@ class AddBookController extends AbstractController
         //3. if status is not successfull throw error
         if ($response['status'] !== 200) throw new \Exception('Unable to create book', $response['status']);
 
-        //4. Redirect back to previous page
-        $referer = $request->headers->get('referer');
-        if ($referer) return $this->redirect($referer);
-
-        //5. Fallback if referer does not exists
-        return $this->redirectToRoute('get_home_page');
+        return $this->redirectToRoute('get_single_author_page', ['id' => $dtoInputs->author]);
     }
 }
