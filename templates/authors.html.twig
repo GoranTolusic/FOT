@@ -3,10 +3,61 @@
 {% block title %}Authors Page{% endblock %}
 
 {% block body %}
- {% if err %}
-    <h1>{{ err }}</h1>
-{% else %}
-    <h1> {{ authors }}</h1>
-{% endif %}
+    {% if err %}
+        <h1>{{ err }}</h1>
+    {% else %}
+        <h1>Authors List</h1>
 
+        <form method="get" style="margin-bottom: 15px;">
+            <label for="direction">Sort:</label>
+            <select name="direction" id="direction" onchange="this.form.submit()">
+                <option value="ASC" {% if direction == 'ASC' %}selected{% endif %}>Ascending</option>
+                <option value="DESC" {% if direction == 'DESC' %}selected{% endif %}>Descending</option>
+            </select>
+
+            {# Hidden field to keep current page when changing sort #}
+            <input type="hidden" name="page" value="{{ current_page }}">
+        </form>
+
+        <div style="margin-bottom: 15px;">
+            {% if show_previous_page %}
+                <a href="{{ path('get_authors_page', {
+                    page: current_page - 1,
+                    direction: direction,
+                    orderBy: orderBy
+                }) }}" class="button">Previous</a>
+            {% endif %}
+
+            {% if show_next_page %}
+                <a href="{{ path('get_authors_page', {
+                    page: current_page + 1,
+                    direction: direction,
+                    orderBy: orderBy
+                }) }}" class="button">Next</a>
+            {% endif %}
+        </div>
+
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in authors %}
+                    <tr>
+                        <td>{{ author.id }}</td>
+                        <td>{{ author.first_name }}</td>
+                        <td>{{ author.last_name }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">No authors found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
