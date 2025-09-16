@@ -59,6 +59,9 @@
         "cache-ready": [
             "php bin/console cache:warmup"
         ],
+        "add-author": [
+            "php bin/console app:add-author"
+        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

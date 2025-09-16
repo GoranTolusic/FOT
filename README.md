@@ -25,5 +25,18 @@ Steps
 4. Run "composer start" to start a server process. This command will trigger php-built-in server process on 8000 port.
 
 
+# USAGE
+- Web page covers everything from requirements (login page, profile page, logout button, list of authors and single authors page, conditional deleting authors and books...)
+- You will be redirected to login page if you are trying to access to any page without token
+- Login page already contain populated credentials from existing users from API
+
+# COMMAND FOR CREATING AUTHORS
+- You can run command in your terminal to create new author. You need to provide arguments in specific order. Each of arguments from example are required
+- SAMPLE command: composer add-author ahsoka.tano@royal-apps.io Kryze4President Marko Markovic male 1990-01-01 Osijek "Hello"
+- First two arguments are user email and password to enable retrieving token required for authentication
+- Order of arguments {email} {password} {first_name} {last_name}, {gender}, {birthday}, {place_of_birth}, {biography}
+
+
+
 
 
