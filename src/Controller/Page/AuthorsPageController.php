@@ -28,7 +28,7 @@ class AuthorsPageController extends AbstractController
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
 
         //HINT: I can retrieve data from user session, but i realized 
-        //there is "me" endpoint in API docs for retrieving info about logged user
+        //there is "me" endpoint in API docs for retrieving info about logged user so i'm gonna use that endpoint for getting data
 
         //3. Get response from candidate api
         $response = $reqService->getJson('/api/v2/authors', [
