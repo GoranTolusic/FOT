@@ -56,7 +56,7 @@ class AuthorsPageController extends AbstractController
         return $this->render('authors.html.twig', [
             'err' => $err,
             'authors' => $response['body']['items'],
-            'page' => $dtoInputs->page,
+            'current_page' => $response['body']['current_page'],
             'direction' => $dtoInputs->direction,
             'orderBy' => $dtoInputs->orderBy,
             'total_results' => $response['body']['total_results'],
