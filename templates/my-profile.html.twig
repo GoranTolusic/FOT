@@ -3,13 +3,35 @@
 {% block title %}Login Page{% endblock %}
 
 {% block body %}
- {% if err %}
-    <h1>{{ err }}</h1>
-{% else %}
-    <h1>First Name: {{ user['first_name'] }}</h1>
-    <h1>Last Name: {{ user['last_name'] }}</h1>
-    <h1>Email: {{ user['email'] }}</h1>
-    <h1>Gender: {{ user['gender'] }}</h1>
-{% endif %}
+    <div class="user-info">
+        {% if err %}
+            <h1>{{ err }}</h1>
+        {% else %}
+            <p><strong>First Name:</strong> {{ user['first_name'] }}</p>
+            <p><strong>Last Name:</strong> {{ user['last_name'] }}</p>
+            <p><strong>Email:</strong> {{ user['email'] }}</p>
+            <p><strong>Gender:</strong> {{ user['gender'] }}</p>
+        {% endif %}
+    </div>
 
+    <style>
+        .user-info {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .user-info h1, .user-info p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .user-info p strong {
+            display: inline-block;
+            width: 100px;
+        }
+    </style>
 {% endblock %}

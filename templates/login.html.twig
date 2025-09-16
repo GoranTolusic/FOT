@@ -3,14 +3,59 @@
 {% block title %}Login Page{% endblock %}
 
 {% block body %}
-<h1>{{ message }}</h1>
+    <div class="login-container">
+        <h1>{{ message }}</h1>
 
-<form action="/auth/login" method="POST">
-    <input type="email" name="email" value="{{ defaultEmail }}" placeholder="Email" required>
-    <input type="password" name="password" value="{{ defaultPassword }}" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
+        <form action="/auth/login" method="POST" class="login-form">
+            <input type="email" name="email" value="{{ defaultEmail }}" placeholder="Email" required>
+            <input type="password" name="password" value="{{ defaultPassword }}" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
 
-<h1>{{ errormsg }}</h1>
+        {% if errormsg %}
+            <p class="error-msg">{{ errormsg }}</p>
+        {% endif %}
+    </div>
 
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .login-form input {
+            padding: 8px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .login-form button {
+            padding: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
 {% endblock %}

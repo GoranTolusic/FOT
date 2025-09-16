@@ -14,7 +14,7 @@
         </p>
 
         {# Search & Sorting form #}
-        <form method="get" style="margin-bottom: 15px;">
+        <form method="get" class="authors-form">
             <label for="query">Search:</label>
             <input type="text" id="query" name="query" value="{{ query }}" maxlength="50" placeholder="Enter search term">
 
@@ -28,14 +28,14 @@
         </form>
 
         {# Previous & Next page links #}
-        <div style="margin-bottom: 15px;">
+        <div class="pagination">
             {% if show_previous_page %}
                 <a href="{{ path('get_authors_page', {
                     page: current_page - 1,
                     query: query,
                     direction: direction,
                     orderBy: orderBy
-                }) }}" class="button">Previous</a>
+                }) }}">Previous</a>
             {% endif %}
 
             {% if show_next_page %}
@@ -44,12 +44,12 @@
                     query: query,
                     direction: direction,
                     orderBy: orderBy
-                }) }}" class="button">Next</a>
+                }) }}">Next</a>
             {% endif %}
         </div>
 
-        {# Actual table of authors #}
-        <table border="1" cellpadding="5" cellspacing="0">
+        {# Table of authors #}
+        <table class="authors-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -64,16 +64,57 @@
                         <td>{{ author.id }}</td>
                         <td>{{ author.first_name }}</td>
                         <td>{{ author.last_name }}</td>
-                        <td>
-                            <a href="{{ path('get_single_author_page', {id: author.id}) }}">See Details</a>
-                        </td>
+                        <td><a href="{{ path('get_single_author_page', {id: author.id}) }}">See Details</a></td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="3">No authors found.</td>
+                        <td colspan="4">No authors found.</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% endif %}
+
+    <style>
+        .authors-form {
+            margin-bottom: 15px;
+        }
+
+        .authors-form input,
+        .authors-form select,
+        .authors-form button {
+            margin-right: 5px;
+            padding: 4px 6px;
+        }
+
+        .pagination {
+            margin-bottom: 10px;
+        }
+
+        .pagination a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+
+        .authors-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .authors-table th,
+        .authors-table td {
+            border: 1px solid #ccc;
+            padding: 5px 8px;
+            text-align: left;
+        }
+
+        .authors-table th {
+            background-color: #f0f0f0;
+        }
+    </style>
 {% endblock %}

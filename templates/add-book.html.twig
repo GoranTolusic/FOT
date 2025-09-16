@@ -3,11 +3,83 @@
 {% block title %}Add New Book{% endblock %}
 
 {% block body %}
- {% if err %}
-    <h1>{{ err }}</h1>
-{% else %}
-   
-   
-{% endif %}
+    {% if err %}
+        <h1>{{ err }}</h1>
+    {% else %}
+        <h1>Add New Book</h1>
 
+        <form method="post" action="{{ path('book_create') }}" class="book-form">
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <select name="author" id="author" required>
+                    <option value="">-- Select Author --</option>
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" maxlength="100" required>
+            </div>
+
+            <div class="form-group">
+                <label for="release_date">Release Date:</label>
+                <input type="date" name="release_date" id="release_date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" rows="4" maxlength="250" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="isbn">ISBN:</label>
+                <input type="text" name="isbn" id="isbn" maxlength="20" required>
+            </div>
+
+            <div class="form-group">
+                <label for="format">Format:</label>
+                <input type="text" name="format" id="format" maxlength="50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="number_of_pages">Number of Pages:</label>
+                <input type="number" name="number_of_pages" id="number_of_pages" min="1" required>
+            </div>
+
+            <button type="submit">Create Book</button>
+        </form>
+    {% endif %}
+
+    <style>
+        .book-form {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .book-form .form-group {
+            margin-bottom: 10px;
+        }
+
+        .book-form label {
+            display: block;
+            margin-bottom: 3px;
+            font-weight: bold;
+        }
+
+        .book-form input,
+        .book-form select,
+        .book-form textarea {
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .book-form button {
+            padding: 7px 15px;
+            cursor: pointer;
+        }
+    </style>
 {% endblock %}

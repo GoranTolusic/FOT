@@ -16,7 +16,7 @@ class AddBookController extends AbstractController
     use RequestValidationTrait;
 
     #[Route('/book/create', name: 'book_create', methods: ['POST'])]
-    public function createBook(Request $request, HttpService $reqService, int $id): Response
+    public function createBook(Request $request, HttpService $reqService): Response
     {
         //1. Validate, sanitize and format inputs from form
         $dtoInputs = $this->validateRequestDto($request->request->all(), CreateBookDto::class);

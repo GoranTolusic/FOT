@@ -1,18 +1,42 @@
 <header>
     <nav>
-        <ul>
+        <ul class="nav-list">
             <li><a href="{{ path('get_home_page') }}">Home</a></li>
 
             {% if app.session.get('access_token') %}
                 <li><a href="{{ path('get_authors_page') }}">Authors</a></li>
-                 <li><a href="{{ path('create_book_page') }}">Add New Book</a></li>
+                <li><a href="{{ path('create_book_page') }}">Add New Book</a></li>
                 <li><a href="{{ path('get_my_profile_page') }}">My Profile</a></li>
                 <li><a href="{{ path('auth_logout') }}">Logout</a></li>
             {% else %}
                 <li><a href="{{ path('get_login_page') }}">Login</a></li>
             {% endif %}
-
         </ul>
     </nav>
+    <hr>
+
+    <style>
+        .nav-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            gap: 15px;
+        }
+
+        .nav-list li {
+            display: inline;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            padding: 6px 10px;
+            color: #007BFF;
+            border-radius: 4px;
+        }
+
+        .nav-list a:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
 </header>
-<hr>
