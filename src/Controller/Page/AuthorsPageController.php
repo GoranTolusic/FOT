@@ -17,7 +17,7 @@ class AuthorsPageController extends AbstractController
     #[Route('/authors', name: 'get_authors_page', methods: ['GET'])]
     public function getAuthorsPage(Request $request, HttpService $reqService): Response
     {
-        //1. Validate and sanitize inputs from query params
+        //1. Validate and sanitize inputs from query params, and set valid dto inputs
         $dtoInputs = $this->validateRequestDto($request->query->all(), AuthorsDto::class);
         
         //2. Retrieve session and access token from it
