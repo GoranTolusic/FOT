@@ -37,6 +37,9 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Description</th>
+                    <th>Release Date</th>
+                    <th>Pages</th>
+                    <th>Format</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -46,6 +49,9 @@
                         <td>{{ book.id }}</td>
                         <td>{{ book.title }}</td>
                         <td>{{ book.description }}</td>
+                        <td>{{ book.release_date|date("d-m-Y")  }}</td>
+                        <td>{{ book.number_of_pages }}</td>
+                        <td>{{ book.format }}</td>
                         <td>
                             <form method="post" action="{{ path('book_delete', {id: book.id}) }}" 
                                   onsubmit="return confirm('Are you sure you want to delete this book?');">
