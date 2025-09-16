@@ -45,8 +45,6 @@ class AuthorsPageController extends AbstractController
             ]
         ]);
 
-        consoleLog($response['body']);
-
         //4. set some error variables if something goes wrong
         $err = false;
         if ($response['status'] !== 200) {

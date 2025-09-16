@@ -8,6 +8,11 @@
     {% else %}
         <h1>Authors List</h1>
 
+        <p>
+            Total results: {{ total_results }} |
+            Page {{ current_page }} of {{ total_pages }}
+        </p>
+
         {# Search & Sorting form #}
         <form method="get" style="margin-bottom: 15px;">
             <label for="query">Search:</label>
@@ -19,11 +24,10 @@
                 <option value="DESC" {% if direction == 'DESC' %}selected{% endif %}>Descending</option>
             </select>
 
-            {# Hidden field to keep current page when changing search or sort #}
-            <input type="hidden" name="page" value="{{ current_page }}">
             <button type="submit">Search</button>
         </form>
 
+        {# Previous & Next page links #}
         <div style="margin-bottom: 15px;">
             {% if show_previous_page %}
                 <a href="{{ path('get_authors_page', {
@@ -44,6 +48,7 @@
             {% endif %}
         </div>
 
+        {# Actual table of authors #}
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
