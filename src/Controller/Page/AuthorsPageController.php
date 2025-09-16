@@ -40,7 +40,8 @@ class AuthorsPageController extends AbstractController
                 'page' => $dtoInputs->page,
                 'limit' => $dtoInputs->limit,
                 'direction' => $dtoInputs->direction,
-                'orderBy' => $dtoInputs->orderBy
+                'orderBy' => $dtoInputs->orderBy,
+                'query' => $dtoInputs->query
             ]
         ]);
 
@@ -55,6 +56,7 @@ class AuthorsPageController extends AbstractController
         //4. Return rendered my profile data
         return $this->render('authors.html.twig', [
             'err' => $err,
+            'query' => $dtoInputs->query,
             'authors' => $response['body']['items'],
             'current_page' => $response['body']['current_page'],
             'direction' => $dtoInputs->direction,

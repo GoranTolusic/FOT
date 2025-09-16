@@ -18,6 +18,10 @@ class AuthorsDto
     #[Assert\Regex(pattern: '/^\d+$/', message: 'Page must contain only numbers.')]
     public string $page = '1';
 
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 50)]
+    public string $query = '';
+
     public readonly string $limit;
 
     public function __construct()

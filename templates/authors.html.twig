@@ -8,21 +8,27 @@
     {% else %}
         <h1>Authors List</h1>
 
+        {# Search & Sorting form #}
         <form method="get" style="margin-bottom: 15px;">
-            <label for="direction">Sort:</label>
-            <select name="direction" id="direction" onchange="this.form.submit()">
+            <label for="query">Search:</label>
+            <input type="text" id="query" name="query" value="{{ query }}" maxlength="50" placeholder="Enter search term">
+
+            <label for="direction">Direction:</label>
+            <select name="direction" id="direction">
                 <option value="ASC" {% if direction == 'ASC' %}selected{% endif %}>Ascending</option>
                 <option value="DESC" {% if direction == 'DESC' %}selected{% endif %}>Descending</option>
             </select>
 
-            {# Hidden field to keep current page when changing sort #}
+            {# Hidden field to keep current page when changing search or sort #}
             <input type="hidden" name="page" value="{{ current_page }}">
+            <button type="submit">Search</button>
         </form>
 
         <div style="margin-bottom: 15px;">
             {% if show_previous_page %}
                 <a href="{{ path('get_authors_page', {
                     page: current_page - 1,
+                    query: query,
                     direction: direction,
                     orderBy: orderBy
                 }) }}" class="button">Previous</a>
@@ -31,6 +37,7 @@
             {% if show_next_page %}
                 <a href="{{ path('get_authors_page', {
                     page: current_page + 1,
+                    query: query,
                     direction: direction,
                     orderBy: orderBy
                 }) }}" class="button">Next</a>
