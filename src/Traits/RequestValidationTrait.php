@@ -8,10 +8,8 @@ use App\Custom\ValidationException;
 
 trait RequestValidationTrait
 {
-    public function validateRequestDto(Request $request, string $dtoClass)
+    public function validateRequestDto(array $data, string $dtoClass)
     {
-        $data = $request->request->all();
-
         // Map fields from dto
         $dtoProps = array_map(fn($prop) => $prop->getName(), (new \ReflectionClass($dtoClass))->getProperties());
 

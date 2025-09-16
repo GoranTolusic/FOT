@@ -18,7 +18,7 @@ class LoginController extends AbstractController
     public function login(Request $request, HttpService $reqService): Response
     {
         //1. Validate and sanitize inputs from form
-        $dtoInputs = $this->validateRequestDto($request, LoginDto::class);
+        $dtoInputs = $this->validateRequestDto($request->request->all(), LoginDto::class);
 
         //2. Get Response from candidate api
         $response = $reqService->postJson('/api/v2/token', [
