@@ -26,9 +26,6 @@ class AuthorsPageController extends AbstractController
         //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
 
-        //HINT: I can retrieve data from user session, but i realized 
-        //there is "me" endpoint in API docs for retrieving info about logged user so i'm gonna use that endpoint for getting data
-
         //3. Get response from candidate api
         $response = $reqService->getJson('/api/v2/authors', [
             'headers' => [
@@ -48,7 +45,7 @@ class AuthorsPageController extends AbstractController
         $err = false;
         if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve authors data';
         
-        //4. Return rendered my profile data
+        //4. Return rendered html
         return $this->render('authors.html.twig', [
             'err' => $err,
             'query' => $dtoInputs->query,

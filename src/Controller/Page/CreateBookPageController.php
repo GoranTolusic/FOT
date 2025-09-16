@@ -8,33 +8,43 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class SingleAuthorPageController extends AbstractController
+class CreateBookPageController extends AbstractController
 {
-    #[Route('/author-details/{id}', name: 'get_single_author_page', methods: ['GET'])]
-    public function getSingleAuthorPage(Request $request, HttpService $reqService, int $id): Response
-    {
+    #[Route('/create-book', name: 'create_book_page', methods: ['GET'])]
+    public function getCreateBookPage(Request $request, HttpService $reqService): Response
+    {       
         //1. Retrieve session and access token from it
         $session = $request->getSession();
         $accessToken = $session->get('access_token');
         //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
 
-        //2. Get response from candidate api
-        $response = $reqService->getJson('/api/v2/authors/'.$id, [
+        //2. Fetch authors for dropdown.
+        //HINT:  I'm hardcoding 50 limit just for sake of dropdown items. 
+        //In real case scenario, implementing dynamic searchable dropdown on client is correct way
+        $authorsResp = $reqService->getJson('/api/v2/authors', [
             'headers' => [
                 'Authorization' => "Bearer $accessToken",
                 'Accept' => 'application/json'
+            ],
+            'query' => [
+                'page' => '1',
+                'limit' => '50',
+                'direction' => 'ASC',
+                'orderBy' => 'id'
             ]
         ]);
 
+        consoleLog($authorsResp);
+
         //3. set some error variables if something goes wrong
         $err = false;
-        if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve author data';
+        if ($authorsResp['status'] !== 200) $err = 'Error occured. Unable to retrieve authors data';
         
         //4. Return rendered html
-        return $this->render('author.html.twig', [
+        return $this->render('add-book.html.twig', [
             'err' => $err,
-            'user' => $response['body']
+            'authors' => $authorsResp['body']['items']
         ]);
     }
 }
