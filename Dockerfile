@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zlib1g-dev \
     libcurl4-openssl-dev \
-    && docker-php-ext-install pdo pdo_mysql intl mbstring zip opcache curl \
+    && docker-php-ext-install intl mbstring zip opcache curl \
     && apt-get clean
 
 # Copy opcache .ini to enable caching for better performance
