@@ -14,6 +14,13 @@
         <h3>Birthday: {{ user['birthday'] }}</h3>
         <h3>Place of Birth: {{ user['place_of_birth'] }}</h3>
 
+        {# Show delete button only if author has no books #}
+        {% if user.books is empty %}
+            <form method="post" action="{{ path('author_delete', {id: user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this author?');" style="margin: 15px 0;">
+                <button type="submit">Delete Author</button>
+            </form>
+        {% endif %}
+
         {# Actual table of books #}
         <h2>Books:</h2>
         <table border="1" cellpadding="5" cellspacing="0">
