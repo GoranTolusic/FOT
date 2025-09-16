@@ -4,6 +4,7 @@
             <li><a href="{{ path('get_home_page') }}">Home</a></li>
 
             {% if app.session.get('access_token') %}
+                <li><a href="{{ path('get_authors_page') }}">Authors</a></li>
                 <li><a href="{{ path('get_my_profile_page') }}">My Profile</a></li>
                 <li><a href="{{ path('auth_logout') }}">Logout</a></li>
             {% else %}
