@@ -48,4 +48,9 @@ class HttpService
     {
         return $this->request('PUT', $url, $options);
     }
+
+    public function deleteJson(string $url, array $options = []): array
+    {
+        return $this->request('DELETE', $url, $options);
+    }
 }

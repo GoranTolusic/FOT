@@ -29,12 +29,11 @@ class LoginController extends AbstractController
         ]);
 
         //3. If token is not retrieved redirect user to login page with error message
-        if ($response['status'] !== 200) {
-            return $this->render('login.html.twig', [
+        if ($response['status'] !== 200) return $this->render('login.html.twig', [
                 'message' => 'Please enter your email and password to login!',
                 'errormsg' => 'Invalid Credentials'
             ]);
-        }
+        
 
         //4. If response is successfull, we are seting token and user data to server session
         $session = $request->getSession();

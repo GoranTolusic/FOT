@@ -32,9 +32,7 @@ class MyProfilePageController extends AbstractController
 
         //3. set some error variables if something goes wrong
         $err = false;
-        if ($response['status'] !== 200) {
-            $err = 'Error occured. Unable to retrieve user data';
-        }
+        if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve user data';
 
         //4. Return rendered my profile data
         return $this->render('my-profile.html.twig', [

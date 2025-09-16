@@ -46,10 +46,8 @@ class AuthorsPageController extends AbstractController
 
         //4. set some error variables if something goes wrong
         $err = false;
-        if ($response['status'] !== 200) {
-            $err = 'Error occured. Unable to retrieve authors data';
-        }
-
+        if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve authors data';
+        
         //4. Return rendered my profile data
         return $this->render('authors.html.twig', [
             'err' => $err,

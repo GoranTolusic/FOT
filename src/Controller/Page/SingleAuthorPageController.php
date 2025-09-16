@@ -19,7 +19,7 @@ class SingleAuthorPageController extends AbstractController
         //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
         if (!$accessToken) return $this->redirectToRoute('get_login_page');
 
-        //3. Get response from candidate api
+        //2. Get response from candidate api
         $response = $reqService->getJson('/api/v2/authors/'.$id, [
             'headers' => [
                 'Authorization' => "Bearer $accessToken",
@@ -27,12 +27,10 @@ class SingleAuthorPageController extends AbstractController
             ]
         ]);
 
-        //4. set some error variables if something goes wrong
+        //3. set some error variables if something goes wrong
         $err = false;
-        if ($response['status'] !== 200) {
-            $err = 'Error occured. Unable to retrieve author data';
-        }
-
+        if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve author data';
+        
         //4. Return rendered my profile data
         return $this->render('author.html.twig', [
             'err' => $err,
