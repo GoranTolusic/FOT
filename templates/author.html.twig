@@ -12,7 +12,13 @@
             <p><strong>First Name:</strong> {{ user['first_name'] }}</p>
             <p><strong>Last Name:</strong> {{ user['last_name'] }}</p>
             <p><strong>Gender:</strong> {{ user['gender'] }}</p>
-            <p><strong>Birthday:</strong> {{ user['birthday'] }}</p>
+           <p><strong>Birthday:</strong> 
+                {% if user['birthday'] %}
+                    {{ user['birthday']|date("d-m-Y") }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
             <p><strong>Place of Birth:</strong> {{ user['place_of_birth'] }}</p>
         </div>
 
