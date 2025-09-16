@@ -37,6 +37,7 @@ class AddAuthorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        //1. Set all input arguments
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
         $firstName = $input->getArgument('first_name');
@@ -46,7 +47,7 @@ class AddAuthorCommand extends Command
         $placeOfBirth = $input->getArgument('place_of_birth');
         $biography = $input->getArgument('biography');
 
-        // --- 1. Login to API ---
+        //2. Login and obtain token from candidate api
         try {
             $loginResp = $this->httpService->postJson('/api/v2/token', [
                 'json' => [
@@ -66,7 +67,7 @@ class AddAuthorCommand extends Command
 
         $token = $loginResp['body']['token_key'];
 
-        // --- 2. Prepare author payload ---
+        //3. Set author payload
         $payload = [
             'first_name' => $firstName,
             'last_name' => $lastName,
@@ -76,7 +77,7 @@ class AddAuthorCommand extends Command
             'biography' => $biography
         ];
 
-        // --- 3. Create author via API ---
+        //4. Get response from candidates api
         try {
             $response = $this->httpService->postJson('/api/v2/authors', [
                 'headers' => [
