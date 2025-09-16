@@ -8,6 +8,8 @@ services:
     environment:
       CONSOLE_LOGS: "true"
       API_URL: "https://candidate-testing.com"
+      API_USER_EMAIL: "ahsoka.tano@royal-apps.io"
+      API_USER_PASSWORD: "Kryze4President"
     expose:
       - "9000"
 
