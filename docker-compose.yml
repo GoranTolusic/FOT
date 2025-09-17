@@ -21,5 +21,6 @@ services:
       - app
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./public:/var/www/html/public 
     ports:
       - "8080:80"
