@@ -1,3 +1,4 @@
+/* Login page */
 .login-container {
     max-width: 400px;
     margin: 50px auto;
@@ -39,7 +40,7 @@
 }
 
 
-
+/* My profile page */
 .user-info {
     max-width: 400px;
     margin: 40px auto;
@@ -57,4 +58,152 @@
 .user-info p strong {
     display: inline-block;
     width: 100px;
+}
+
+
+/* Home page */
+.login-message {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.login-message h1 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+
+/* Authors page */
+.authors-form {
+    margin-bottom: 15px;
+}
+
+.authors-form input,
+.authors-form select,
+.authors-form button {
+    margin-right: 5px;
+    padding: 4px 6px;
+}
+
+.pagination {
+    margin-bottom: 10px;
+}
+
+.pagination a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+.authors-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.authors-table th,
+.authors-table td {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    text-align: left;
+}
+
+.authors-table th {
+    background-color: #f0f0f0;
+}
+
+
+/* Single author page */
+.author-info p {
+    margin: 5px 0;
+}
+
+.delete-form {
+    margin: 10px 0;
+}
+
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.books-table th,
+.books-table td {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    text-align: left;
+}
+
+.books-table th {
+    background-color: #f0f0f0;
+}
+
+.books-table form button {
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+
+/* Add book page */
+.book-form {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.book-form .form-group {
+    margin-bottom: 10px;
+}
+
+.book-form label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.book-form input,
+.book-form select,
+.book-form textarea {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.book-form button {
+    padding: 7px 15px;
+    cursor: pointer;
+}
+
+
+/* Header */
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    gap: 15px;
+}
+
+.nav-list li {
+    display: inline;
+}
+
+.nav-list a {
+    text-decoration: none;
+    padding: 6px 10px;
+    color: #007BFF;
+    border-radius: 4px;
+}
+
+.nav-list a:hover {
+    background-color: #f0f0f0;
 }
