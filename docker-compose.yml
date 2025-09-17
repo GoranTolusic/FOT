@@ -20,7 +20,6 @@ services:
     depends_on:
       - app
     volumes:
-      - .:/var/www/html
       - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
       - "8080:80"
