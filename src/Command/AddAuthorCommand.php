@@ -22,6 +22,8 @@ class AddAuthorCommand extends Command
 
     protected function configure(): void
     {
+        //I set all command params as requiredinputs arguments, 
+        //just to be sure every parameter for create author requst is defined, just to escape potential bad request error from candidates API
         $this
             ->setName('app:add-author')
             ->setDescription('Add a new author via API using login credentials')
@@ -48,17 +50,12 @@ class AddAuthorCommand extends Command
         $biography = $input->getArgument('biography');
 
         //2. Login and obtain token from candidate api
-        try {
-            $loginResp = $this->httpService->postJson('/api/v2/token', [
-                'json' => [
-                    'email' => $email,
-                    'password' => $password
-                ]
-            ]);
-        } catch (\Exception $e) {
-            $output->writeln('<error>Login failed: ' . $e->getMessage() . '</error>');
-            return Command::FAILURE;
-        }
+        $loginResp = $this->httpService->postJson('/api/v2/token', [
+            'json' => [
+                'email' => $email,
+                'password' => $password
+            ]
+        ]);
 
         if ($loginResp['status'] !== 200 || empty($loginResp['body']['token_key'])) {
             $output->writeln('<error>Invalid login credentials or API error</error>');
@@ -78,18 +75,14 @@ class AddAuthorCommand extends Command
         ];
 
         //4. Get response from candidates api
-        try {
-            $response = $this->httpService->postJson('/api/v2/authors', [
-                'headers' => [
-                    'Authorization' => "Bearer $token",
-                    'Accept' => 'application/json'
-                ],
-                'json' => $payload
-            ]);
-        } catch (\Exception $e) {
-            $output->writeln('<error>Failed to create author: ' . $e->getMessage() . '</error>');
-            return Command::FAILURE;
-        }
+        $response = $this->httpService->postJson('/api/v2/authors', [
+            'headers' => [
+                'Authorization' => "Bearer $token",
+                'Accept' => 'application/json'
+            ],
+            'json' => $payload
+        ]);
+
 
         if ($response['status'] !== 200) {
             $output->writeln('<error>Unable to create author. Status: ' . $response['status'] . '</error>');
