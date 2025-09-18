@@ -13,11 +13,8 @@ class SingleAuthorPageController extends AbstractController
     #[Route('/author-details/{id}', name: 'get_single_author_page', methods: ['GET'])]
     public function getSingleAuthorPage(Request $request, HttpService $reqService, int $id): Response
     {
-        //1. Retrieve session and access token from it
-        $session = $request->getSession();
-        $accessToken = $session->get('access_token');
-        //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
-        if (!$accessToken) return $this->redirectToRoute('get_login_page');
+        //1. Getting access token
+        $accessToken = $request->attributes->get('access_token');
 
         //2. Get response from candidate api
         $response = $reqService->getJson('/api/v2/authors/'.$id, [

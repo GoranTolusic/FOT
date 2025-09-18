@@ -13,11 +13,8 @@ class DeleteAuthorController extends AbstractController
     #[Route('/author/delete/{id}', name: 'author_delete', methods: ['POST'])]
     public function deleteAuthor(Request $request, HttpService $reqService, int $id): Response
     {
-        //1. Retrieve session and access token from it
-        $session = $request->getSession();
-        $accessToken = $session->get('access_token');
-        //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
-        if (!$accessToken) return $this->redirectToRoute('get_login_page');
+        //1. Getting access token
+        $accessToken = $request->attributes->get('access_token');
 
         //2. Get user response from candidate api
         $authorResp = $reqService->getJson('/api/v2/authors/'.$id, [
@@ -39,10 +36,10 @@ class DeleteAuthorController extends AbstractController
             ]
         ]);
 
-        //3. if status is not successfull throw error
+        //4. if status is not successfull throw error
         if ($response['status'] !== 204) throw new \Exception('Unable to delete author', $response['status']);
 
-        //4. Redirect user to authors page
+        //5. Redirect user to authors page
         return $this->redirectToRoute('get_authors_page');
     }
 }

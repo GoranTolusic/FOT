@@ -22,13 +22,10 @@ class AddBookController extends AbstractController
         $dtoInputs = $this->validateRequestDto($request->request->all(), CreateBookDto::class);
         $formatedInputs = $dtoInputs->formatToArray();
 
-        //1. Retrieve session and access token from it
-        $session = $request->getSession();
-        $accessToken = $session->get('access_token');
-        //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
-        if (!$accessToken) return $this->redirectToRoute('get_login_page');
+        //2. Getting access token
+        $accessToken = $request->attributes->get('access_token');
 
-        //2. Get Response from candidate api
+        //3. Get Response from candidate api
         $response = $reqService->postJson('/api/v2/books', [
             'headers' => [
                 'Authorization' => "Bearer $accessToken",
@@ -37,9 +34,10 @@ class AddBookController extends AbstractController
             'json' => $formatedInputs
         ]);
 
-        //3. if status is not successfull throw error
+        //4. if status is not successfull throw error
         if ($response['status'] !== 200) throw new \Exception('Unable to create book', $response['status']);
 
+        //5. Redirect to author page (since we don't have single book page)
         return $this->redirectToRoute('get_single_author_page', ['id' => $dtoInputs->author]);
     }
 }

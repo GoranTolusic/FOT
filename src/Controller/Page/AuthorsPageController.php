@@ -20,11 +20,10 @@ class AuthorsPageController extends AbstractController
         //1. Validate and sanitize inputs from query params, and set valid dto inputs
         $dtoInputs = $this->validateRequestDto($request->query->all(), AuthorsDto::class);
         
-        //2. Retrieve session and access token from it
-        $session = $request->getSession();
-        $accessToken = $session->get('access_token');
-        //If access token is missing from session we are assuming that session is invalidated so we are redirecting to login page
-        if (!$accessToken) return $this->redirectToRoute('get_login_page');
+        //2. Getting access token
+        $accessToken = $request->attributes->get('access_token');
+        consoleLog('token:');
+        consoleLog($accessToken);
 
         //3. Get response from candidate api
         $response = $reqService->getJson('/api/v2/authors', [
@@ -45,7 +44,7 @@ class AuthorsPageController extends AbstractController
         $err = false;
         if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve authors data';
         
-        //4. Return rendered html
+        //5. Return rendered html
         return $this->render('authors.html.twig', [
             'err' => $err,
             'query' => $dtoInputs->query,
