@@ -22,8 +22,6 @@ class AuthorsPageController extends AbstractController
         
         //2. Getting access token
         $accessToken = $request->attributes->get('access_token');
-        consoleLog('token:');
-        consoleLog($accessToken);
 
         //3. Get response from candidate api
         $response = $reqService->getJson('/api/v2/authors', [
