@@ -43,8 +43,7 @@ class AuthorsPageController extends AbstractController
         if ($response['status'] !== 200) $err = 'Error occured. Unable to retrieve authors data';
         
         //5. Return rendered html
-        return $this->render('authors.html.twig', [
-            'err' => $err,
+        return $this->render('authors.html.twig', $err ? ['err' => $err] : [
             'query' => $dtoInputs->query,
             'authors' => $response['body']['items'],
             'current_page' => $response['body']['current_page'],

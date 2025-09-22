@@ -33,8 +33,7 @@
                 <a href="{{ path('get_authors_page', {
                     page: current_page - 1,
                     query: query,
-                    direction: direction,
-                    orderBy: orderBy
+                    direction: direction
                 }) }}">Previous</a>
             {% endif %}
 
@@ -42,8 +41,7 @@
                 <a href="{{ path('get_authors_page', {
                     page: current_page + 1,
                     query: query,
-                    direction: direction,
-                    orderBy: orderBy
+                    direction: direction
                 }) }}">Next</a>
             {% endif %}
         </div>

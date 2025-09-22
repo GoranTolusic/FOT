@@ -11,7 +11,7 @@ class AuthorsDto
     public string $direction = 'ASC';
 
     #[Assert\Type('string')]
-    #[Assert\Choice(choices: ['id', 'first_name', 'last_name'], message: 'OrderBy must be id, first_name or last_name.')]
+    #[Assert\Choice(choices: ['id'], message: 'OrderBy must be id, first_name or last_name.')]
     public string $orderBy = 'id';
 
     #[Assert\Type('string')]
