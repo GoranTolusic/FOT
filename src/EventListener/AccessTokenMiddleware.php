@@ -35,6 +35,7 @@ class AccessTokenMiddleware
         $accessToken = $request->getSession()?->get('access_token');
         if (!$accessToken) $event->setResponse(new RedirectResponse($this->router->generate('get_login_page')));
 
+        //Even if backend send redirect response this line will be executed, but it will set access token as empty/null for current session so we are good anyway
         $request->attributes->set('access_token', $accessToken);
     }
 }
