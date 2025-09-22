@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 
 class HttpService
 {
@@ -23,7 +24,7 @@ class HttpService
         try {
             $content = json_decode($response->getContent(), true);
             $status = $response->getStatusCode();
-        } catch (\Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface $e) {
+        } catch (ClientExceptionInterface $e) {
             $status = $e->getResponse()->getStatusCode();
             $content = json_decode($e->getResponse()->getContent(false), true);
         }
