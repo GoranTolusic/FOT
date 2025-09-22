@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "Waiting DNS for MySQL ($DB_HOST)..."
-
 #Clear and ready cache
 composer cache-clear
 composer cache-ready
